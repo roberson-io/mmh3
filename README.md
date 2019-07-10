@@ -15,6 +15,8 @@ The Python [mmh3](https://github.com/hajimes/mmh3) package has a `hash` function
 import (
     "encoding/binary"
     "fmt"
+
+    "github.com/roberson-io/mmh3"
 )
 
  key := []byte("foo")
