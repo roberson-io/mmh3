@@ -23,12 +23,12 @@ func TestHashx86_32(t *testing.T) {
 			hash := Hashx86_32(key, seed)
 			if endian.Uint32(hash) != expected {
 				t.Errorf(
-                    "Hashx86_32: key: %s seed: %x hash: %x expected: %x",
-                    message,
-                    seed,
-                    endian.Uint32(hash),
-                    expected,
-                )
+					"Hashx86_32: key: %s seed: %x hash: %x expected: %x",
+					message,
+					seed,
+					endian.Uint32(hash),
+					expected,
+				)
 			}
 		}
 	}
@@ -51,16 +51,16 @@ func TestHashx86_128(t *testing.T) {
 		for seed, expected := range seeds {
 			key := []byte(message)
 			hash := Hashx86_128(key, seed)
-            convertedHash := [2]uint64{endian.Uint64(hash[:8]), endian.Uint64(hash[8:])}
+			convertedHash := [2]uint64{endian.Uint64(hash[:8]), endian.Uint64(hash[8:])}
 			if convertedHash != expected {
 				t.Errorf(
-                    "Hashx86_128: key: %s seed: %x hash: [%x, %x] expected: %x",
-                    message,
-                    seed,
-                    endian.Uint64(hash[:8]),
-                    endian.Uint64(hash[8:]),
-                    expected,
-                )
+					"Hashx86_128: key: %s seed: %x hash: [%x, %x] expected: %x",
+					message,
+					seed,
+					endian.Uint64(hash[:8]),
+					endian.Uint64(hash[8:]),
+					expected,
+				)
 			}
 		}
 	}
@@ -83,17 +83,17 @@ func TestHashx64_128(t *testing.T) {
 		for seed, expected := range seeds {
 			key := []byte(message)
 			hash := Hashx64_128(key, seed)
-            convertedHash := [2]uint64{endian.Uint64(hash[:8]), endian.Uint64(hash[8:])}
+			convertedHash := [2]uint64{endian.Uint64(hash[:8]), endian.Uint64(hash[8:])}
 			if convertedHash != expected {
 				t.Errorf(
-                    "Hashx64_128: key: %s seed: %x hash: [%x, %x] expected: %x",
-                    message,
-                    seed,
-                    endian.Uint64(hash[:8]),
-                    endian.Uint64(hash[8:]),
-                    expected,
-                )
+					"Hashx64_128: key: %s seed: %x hash: [%x, %x] expected: %x",
+					message,
+					seed,
+					endian.Uint64(hash[:8]),
+					endian.Uint64(hash[8:]),
+					expected,
+				)
 			}
 		}
-    }
+	}
 }
