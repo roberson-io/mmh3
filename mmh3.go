@@ -7,21 +7,19 @@ import (
 	"github.com/roberson-io/mmh3/MurmurHash3"
 )
 
-// Endianness checking pattern from TensorFlow
-// https://github.com/tensorflow/tensorflow/blob/master/tensorflow/go/tensor.go#L488-L505
-var nativeEndian binary.ByteOrder
+var endian binary.ByteOrder
 
 func init() {
-	buf := [2]byte{}
-	*(*uint16)(unsafe.Pointer(&buf[0])) = uint16(0xABCD)
+	twoBytes := [2]byte{}
+	*(*uint16)(unsafe.Pointer(&twoBytes[0])) = uint16(0x1234)
 
-	switch buf {
-	case [2]byte{0xCD, 0xAB}:
-		nativeEndian = binary.LittleEndian
-	case [2]byte{0xAB, 0xCD}:
-		nativeEndian = binary.BigEndian
+	switch twoBytes {
+	case [2]byte{0x12, 0x34}:
+		endian = binary.BigEndian
+	case [2]byte{0x34, 0x12}:
+		endian = binary.LittleEndian
 	default:
-		panic("Could not determine native endianness.")
+		panic("Unknown endianness.")
 	}
 }
 
@@ -36,7 +34,7 @@ func mmh3Hash(key []byte, seed uint32, is32Bit bool, mmh3Func mmh3Function) []by
 		blockSize = 4
 		nBytes = 4
 		for i := 0; i < len(key); i += blockSize {
-			block := nativeEndian.Uint32(key[i : i+blockSize])
+			block := endian.Uint32(key[i : i+blockSize])
 			data32 = append(data32, block)
 		}
 		ptrKey = uintptr(unsafe.Pointer(&data32[0]))
@@ -44,7 +42,7 @@ func mmh3Hash(key []byte, seed uint32, is32Bit bool, mmh3Func mmh3Function) []by
 		blockSize = 8
 		nBytes = 16
 		for i := 0; i < len(key); i += blockSize {
-			block := nativeEndian.Uint64(key[i : i+blockSize])
+			block := endian.Uint64(key[i : i+blockSize])
 			data64 = append(data64, block)
 		}
 		ptrKey = uintptr(unsafe.Pointer(&data64[0]))
