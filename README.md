@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/roberson-io/mmh3.svg?branch=master)](https://travis-ci.org/roberson-io/mmh3)
+[![BuildStatus](https://travis-ci.org/roberson-io/mmh3.svg?branch=master)](https://travis-ci.org/roberson-io/mmh3) [![GoDoc](https://godoc.org/github.com/roberson-io/mmh3?status.svg)](http://godoc.org/github.com/roberson-io/mmh3)
+
 
 # MurmurHash3 for Golang
 This is a Golang wrapper for the original [MurmurHash3](https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp) C++ implementation. It was created with [SWIG](http://swig.org). The goal is to make something similar to the Python [mmh3](https://github.com/hajimes/mmh3) package for Golang.
