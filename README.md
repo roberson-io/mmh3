@@ -12,7 +12,7 @@ You probably just want to use the three helper functions in the mmh3.go file at 
 
 The files in the `MurmurHash3` directory are for SWIG and are not very readable.
 
-The Python [mmh3](https://github.com/hajimes/mmh3) package has a `hash` function that is just shorthand for the x86 32-bit MurmurHash3 function.  It also returns signed integers by default. I have done no such thing in this package. You must pass the input as a byte slice, provide a seed value, and specify which MurmurHash3 function you want to use. If you want to hash a string a la `print(hex(mmh3.hash('foo')))` in Python mmh3, you might do something like:
+The Python [mmh3](https://github.com/hajimes/mmh3) package has a `hash` function that is just shorthand for the x86 32-bit MurmurHash3 function.  It also returns signed integers by default. I have done no such thing in this package. You must pass the input as a byte slice, provide a seed value, and specify which MurmurHash3 function you want to use. If you want to hash a string à la `print(hex(mmh3.hash('foo')))` in Python mmh3, you might do something like:
 
 ```golang
 import (
@@ -49,6 +49,7 @@ You can call the other two functions the same way:
 ```
 
 ## Why?
-I am aware of DataDog's Golang implementation of [mmh3](https://github.com/DataDog/mmh3). Key differences between that project and this one are:
-- DataDog's implementation is pure Go while this one is just a wrapper around the original C++ implementation.
-- The DataDog implementation does not allow you to specify a seed value.
+I am aware of reusee's Golang implementation of [mmh3](https://github.com/reusee/mmh3). Key differences between that project and this one are:
+- This just a wrapper around the original C++ implementation (not pure Go)
+- This allows you to specify a seed value.
+- This does not implement the hash.Hash interface used in standard library packages (crypto/md5, crypto/sha256, etc.).
